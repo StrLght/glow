@@ -1,0 +1,3 @@
+import package.game
+
+package.game.start ()

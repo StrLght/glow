@@ -1,0 +1,3 @@
+include glow
+recursive-include package/data *
+

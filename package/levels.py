@@ -185,7 +185,7 @@ class Level6(Level):
 		self.going = True
 		self.completed = False
 		self.eng.set_background(entity.Entity('moon.png',0,0))
-		self.eng.add_entity(entity.Text("Hello?",36,"m46.TTF",(0,320),(255,255,255)))
+		self.eng.add_entity(entity.Text("Hello?",36,"m46.TTF",(50,320),(255,255,255)))
 		self.eng.add_entity(entity.Text("Anybody?...",36,"m46.TTF",(480,-40),(255,255,255)))
 		self.eng.add_entity(entity.Entity('hero.png',10,396,"player",40))
 		self.eng.add_entity(entity.Entity('pic2.png',0,440,scale=(150,80)))
@@ -213,7 +213,7 @@ class Level7(Level):
 		self.eng.clear()
 		self.going = True
 		self.completed = False
-		self.eng.set_background(entity.Entity('Sun.png',0,0))
+		self.eng.set_background(entity.Entity('sun.png',0,0))
 		self.eng.add_entity(entity.Text("This world is strange",36,"m46.TTF",(50,220),(255,255,255)))
 		self.eng.add_entity(entity.Entity('hero.png',50,396,"player",40))
 		self.eng.add_entity(entity.Entity('pic2.png',0,440,scale=(130,30)))
@@ -252,7 +252,7 @@ class Level8(Level):
 		self.eng.clear()
 		self.going = True
 		self.completed = False
-		self.eng.set_background(entity.Entity('Far.png',0,0))
+		self.eng.set_background(entity.Entity('far.png',0,0))
 		self.eng.add_entity(entity.Text("Wait",36,"m46.TTF",(80,320),(255,255,255)))
 		self.eng.add_entity(entity.Text("Far far away",36,"m46.TTF",(350,290),(255,255,255)))
 		self.eng.add_entity(entity.Text("Is it...?",36,"m46.TTF",(670,265),(255,255,255)))
@@ -283,7 +283,7 @@ class Level9(Level):
 		self.eng.clear()
 		self.going = True
 		self.completed = False
-		self.eng.set_background(entity.Entity('Sun.png',0,0))
+		self.eng.set_background(entity.Entity('sun.png',0,0))
 		self.eng.add_entity(entity.Entity('hero.png',30,195,"player",40))
 		self.eng.add_entity(entity.Entity('pic2.png',0,240,scale=(150,80)))
 		self.eng.add_entity(entity.Entity('pic2.png',200,260,scale=(40,40)))
@@ -313,9 +313,9 @@ class Level10(Level):
 		self.eng.clear()
 		self.going = True
 		self.completed = False
-		self.eng.set_background(entity.Entity('Moon.png',0,0))
+		self.eng.set_background(entity.Entity('moon.png',0,0))
 		self.eng.add_entity(entity.Text("What the hell?",36,"m46.TTF",(490,-120),(255,255,255)))
-		self.eng.add_entity(entity.Text("fuf",36,"m46.TTF",(550,420),(255,255,255)))
+		self.eng.add_entity(entity.Text("phew",36,"m46.TTF",(520,420),(255,255,255)))
 		self.eng.add_entity(entity.Entity('hero.png',30,195,"player",40))
 		self.eng.add_entity(entity.Entity('pic2.png',0,240,scale=(150,80)))
 		self.eng.add_entity(entity.Entity('pic2.png',200,220,scale=(40,40)))
@@ -346,7 +346,7 @@ class LevelPrelast(Level):
 		self.eng.clear()
 		self.going = True
 		self.completed = False
-		self.eng.set_background(entity.Entity('Moon.png',0,0))
+		self.eng.set_background(entity.Entity('moon.png',0,0))
 		self.eng.add_entity(entity.Text("I have found you!",36,"m46.TTF",(150,265),(255,255,255)))
 		self.eng.add_entity(entity.Entity('hero.png',10,396,"player",40))
 		self.eng.add_entity(entity.Entity('pic2.png',-20,440,scale=(680,80)))
@@ -370,7 +370,7 @@ class LevelLast(Level):
 		self.eng.clear()
 		self.going = True
 		self.completed = False
-		self.eng.set_background(entity.Entity('Sun.png',0,0))
+		self.eng.set_background(entity.Entity('sun.png',0,0))
 		self.eng.add_entity(entity.Text("Not again.",36,"m46.TTF",(200,200),(255,255,255)))
 		self.eng.add_entity(entity.Text("Wait. It was night minute ago.",36,"m46.TTF",(450,200),(255,255,255)))
 		self.eng.add_entity(entity.Text("Where's she?",36,"m46.TTF",(1050,200),(255,255,255)))
@@ -398,7 +398,7 @@ class LevelSrslyLast(Level):
 		self.eng.clear()
 		self.going = True
 		self.completed = False
-		self.eng.set_background(entity.Entity('Sun.png',0,0))
+		self.eng.set_background(entity.Entity('sun.png',0,0))
 		self.eng.add_entity(entity.Text("I will never find her again",36,"m46.TTF",(10,200),(255,255,255)))
 		self.eng.add_entity(entity.Text("Why can't I be happy for a while? :(",36,"m46.TTF",(275,-150),(255,255,255)))
 		self.eng.add_entity(entity.Entity('hero.png',10,396,"player",40))
@@ -458,3 +458,4 @@ class Outro(Level):
 		self.eng.render()
 		self.eng.delay(5000)
 		self.eng.clear()
+

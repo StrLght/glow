@@ -100,3 +100,4 @@ class Text(Entity):
 		font = pygame.font.Font(fullname,size)
 		self.image = font.render(text,1,(r,g,b))
 		self.rect = self.image.get_rect()
+

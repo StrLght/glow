@@ -3,7 +3,7 @@ from package import engine, entity, levels
 lvls =  []
 
 def start():
-	eng = engine.Engine(640,480,4,"Forever Glow")
+	eng = engine.Engine(640,480,4,"Glow")
 	eng.play_music('music.ogg',-1)
 	eng.set_background(entity.Entity('logo.png',0,0))
 	eng.render()

@@ -14,6 +14,7 @@ class Engine:
 		self.g = g
 		self.totaldelta = 0
 		self.player = None
+		self.exit = None
 		self.sprites = pygame.sprite.RenderPlain()
 
 	def set_background(self,background):
@@ -55,6 +56,8 @@ class Engine:
 		self.sprites.add(entity)
 		if entity.enttype == "player":
 			self.player = self.entities[len(self.entities) - 1]
+		if entity.enttype == "exit":
+			self.exit = self.entities[len(self.entities) - 1]
 
 	def remove_entity(self,entity):
 		self.entities.remove(entity)
@@ -105,7 +108,7 @@ class Engine:
 		return retval
 
 	def check_completed_collision(self):
-		if len(self.check_collision(self.player,True)) != 0:
+		if self.player.rect.colliderect(self.exit.rect):
 			return True
 		else:
 			return False
@@ -159,3 +162,4 @@ class Engine:
 
 	def quit(self):
 		sys.exit(0)
+

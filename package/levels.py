@@ -1,4 +1,4 @@
-import   copy
+import copy
 from pygame.locals import *
 from package import entity
 
@@ -12,7 +12,7 @@ class Level:
 	def handle_input(self):
 		entity = copy.deepcopy(self.eng.player)
 		pressed = self.eng.get_pressed()
-		if pressed[K_LEFT] == 1 or pressed[ord('a')] == 1:
+		if pressed[K_LEFT] or pressed[ord('a')]:
 			entity.rect.x -= 5
 			collision = self.eng.check_collision(entity)
 			if len(collision)==1:
@@ -21,7 +21,7 @@ class Level:
 				if self.eng.entities[collision[1]].enttype != "lift":
 					if self.eng.entities[collision[1]].rect.bottom < self.eng.entities[collision[1]].rect.top:
 						self.eng.player.rect.left = self.eng.entities[collision[1]].rect.right
-		if pressed[K_RIGHT] == 1 or pressed[ord('d')] == 1:
+		if pressed[K_RIGHT] or pressed[ord('d')]:
 			entity.rect.x += 5
 			collision = self.eng.check_collision(entity)
 			if len(collision) == 1:
@@ -30,13 +30,13 @@ class Level:
 				if self.eng.entities[collision[1]].enttype != "lift":
 					if self.eng.entities[collision[1]].rect.bottom < self.eng.entities[collision[1]].rect.top:
 						self.eng.player.rect.right = self.eng.entities[collision[1]].rect.left
-		if pressed[K_UP] == 1 or pressed[K_SPACE] == 1 or pressed[ord('w')] == 1:
+		if pressed[K_UP] or pressed[K_SPACE] or pressed[ord('w')]:
 			if not self.eng.player.jumping:
 				self.jumpsound.play()
 				self.eng.player.jumpheight = self.eng.player.totalheight
 				self.eng.player.jumping = True
-		if pressed[K_ESCAPE] == 1:
-			self.eng.player.rect.top = 481
+		if pressed[K_ESCAPE]:
+			self.eng.quit()
 
 	def jump(self):
 		if self.eng.player.jumpheight > 0:
@@ -325,7 +325,7 @@ class Level10(Level):
 		self.eng.add_entity(entity.Entity('pic2.png',560,140,scale=(40,40)))
 		self.eng.add_entity(entity.Entity('pic2.png',620,440,scale=(200,40)))
 		self.eng.add_entity(entity.Lift('platform.png',825,440,825,1225,0,0,3))
-		self.eng.add_entity(entity.Lift('platform.png',1325,35,0,0,35,435,0,dy=-3))
+		self.eng.add_entity(entity.Lift('platform.png',1325,35,0,0,35,435,dy=-3))
 		self.eng.add_entity(entity.Entity('pic2.png',1425,30,scale=(150,40)))
 		self.eng.add_entity(entity.Entity('exit.png',1540,-14,"exit"))
 		while self.going and not self.completed:

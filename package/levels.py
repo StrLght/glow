@@ -52,10 +52,28 @@ class Level:
 	def run(self):
 		pass
 
-class Level1(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
+	def start_with_camera(self):
+		while self.going and not self.completed:
+			self.needs_respawn()
+			self.eng.update_camera()
+			self.eng.handle_input()
+			self.handle_input()
+			self.eng.clock.tick(30)
+			self.jump()
+			self.eng.render()
+			self.completed = self.eng.check_completed_collision()
 
+	def start_without_camera(self):
+		while self.going and not self.completed:
+			self.needs_respawn()
+			self.eng.handle_input()
+			self.handle_input()
+			self.eng.clock.tick(30)
+			self.jump()
+			self.eng.render()
+			self.completed = self.eng.check_completed_collision()
+
+class Level1(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -66,20 +84,9 @@ class Level1(Level):
 		self.eng.add_entity(entity.Entity('hero.png',10,396,"player",45))
 		self.eng.add_entity(entity.Entity('pic2.png',-20,440,scale=(680,80)))
 		self.eng.add_entity(entity.Entity('exit.png',605,396,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			# self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_without_camera()
 
 class Level2(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -92,20 +99,9 @@ class Level2(Level):
 		self.eng.add_entity(entity.Entity('pic2.png',550,400,scale=(50,40)))
 		self.eng.add_entity(entity.Entity('pic2.png',590,380,scale=(50,60)))
 		self.eng.add_entity(entity.Entity('exit.png',605,336,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			# self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_without_camera()
 
 class Level3(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -117,20 +113,9 @@ class Level3(Level):
 		self.eng.add_entity(entity.Lift('platform.png',270,440,110,455,440,440,-3))
 		self.eng.add_entity(entity.Entity('pic2.png',551,440,scale=(100,80)))
 		self.eng.add_entity(entity.Entity('exit.png',605,396,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			# self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_without_camera()
 
 class Level4(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -145,9 +130,6 @@ class Level4(Level):
 			self.eng.delay(200)
 
 class Level5(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -166,20 +148,9 @@ class Level5(Level):
 		self.eng.add_entity(entity.Lift('platform.png',401,75,400,740,75,75,3))
 		self.eng.add_entity(entity.Entity('pic2.png',845,75,scale=(100,30)))
 		self.eng.add_entity(entity.Entity('exit.png',910,31,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_with_camera()
 
 class Level6(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -195,20 +166,9 @@ class Level6(Level):
 		self.eng.add_entity(entity.Lift('platform.png',1105,120,1105,1430,0,0,3))
 		self.eng.add_entity(entity.Entity('pic2.png',1530,120,scale=(150,40)))
 		self.eng.add_entity(entity.Entity('exit.png',1647,76,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_with_camera()
 
 class Level7(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -233,20 +193,9 @@ class Level7(Level):
 		self.eng.add_entity(entity.Entity('pic2.png',1270,300,scale=(30,30)))
 		self.eng.add_entity(entity.Entity('pic2.png',1370,285,scale=(130,30)))
 		self.eng.add_entity(entity.Entity('exit.png',1460,241,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_with_camera()
 
 class Level8(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -264,20 +213,9 @@ class Level8(Level):
 		self.eng.add_entity(entity.Lift('platform.png',1425,360,1420,1570,0,0,-3))
 		self.eng.add_entity(entity.Entity('pic2.png',1655,360,scale=(150,160)))
 		self.eng.add_entity(entity.Entity('exit.png',1770,316,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_with_camera()
 
 class Level9(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -294,20 +232,9 @@ class Level9(Level):
 		self.eng.add_entity(entity.Entity('pic2.png',870,260,scale=(40,40)))
 		self.eng.add_entity(entity.Entity('pic2.png',960,240,scale=(150,80)))
 		self.eng.add_entity(entity.Entity('exit.png',1079,195,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_with_camera()
 
 class Level10(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -327,20 +254,9 @@ class Level10(Level):
 		self.eng.add_entity(entity.Lift('platform.png',1325,35,0,0,35,435,dy=-3))
 		self.eng.add_entity(entity.Entity('pic2.png',1425,30,scale=(150,40)))
 		self.eng.add_entity(entity.Entity('exit.png',1540,-14,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_with_camera()
 
 class LevelPrelast(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -351,20 +267,9 @@ class LevelPrelast(Level):
 		self.eng.add_entity(entity.Entity('pic2.png',-20,440,scale=(680,80)))
 		self.eng.add_entity(entity.Entity('black.png',595,360,"exit",scale=(10,80)))
 		self.eng.add_entity(entity.Entity('fhero.png',605,396))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			# self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_without_camera()
 
 class LevelLast(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -379,20 +284,9 @@ class LevelLast(Level):
 		self.eng.add_entity(entity.Lift('platform.png',270,440,110,1705,0,0,-3))
 		self.eng.add_entity(entity.Entity('pic2.png',1800,440,scale=(100,80)))
 		self.eng.add_entity(entity.Entity('exit.png',1854,396,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_with_camera()
 
 class LevelSrslyLast(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -407,20 +301,9 @@ class LevelSrslyLast(Level):
 		self.eng.add_entity(entity.Lift('platform.png',300,110,110,110,-40,110,dy=-3))
 		self.eng.add_entity(entity.Entity('pic2.png',390,-35,scale=(150,60)))
 		self.eng.add_entity(entity.Entity('exit.png',505,-79,"exit"))
-		while self.going and not self.completed:
-			self.needs_respawn()
-			self.eng.update_camera()
-			self.eng.handle_input()
-			self.handle_input()
-			self.eng.clock.tick(30)
-			self.jump()
-			self.eng.render()
-			self.completed = self.eng.check_completed_collision()
+		self.start_with_camera()
 
 class Outro(Level):
-	def __init__(self,engine):
-		Level.__init__(self,engine)
-
 	def run(self):
 		self.eng.clear()
 		self.completed = True

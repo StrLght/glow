@@ -1,5 +1,5 @@
 #!/usr/bin/env python
 import package.game
 
-package.game.start ()
+package.game.start()
 

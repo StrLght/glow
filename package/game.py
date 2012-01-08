@@ -1,4 +1,5 @@
-from package import engine, entity, levels
+import engine
+from levels import *
 
 lvls =  []
 
@@ -17,7 +18,7 @@ def start():
 	eng.render()
 	eng.delay(2000)
 	eng.clear()
-	lvls = [levels.Level1(eng),levels.Level2(eng),levels.Level3(eng),levels.Level4(eng),levels.Level5(eng),levels.Level6(eng),levels.Level7(eng),levels.Level8(eng),levels.Level9(eng),levels.Level10(eng),levels.LevelPrelast(eng),levels.Level4(eng),levels.LevelLast(eng),levels.LevelSrslyLast(eng),levels.Outro(eng)]
+	lvls = [Level1(eng),Level2(eng),Level3(eng),Level4(eng),Level5(eng),Level6(eng),Level7(eng),Level8(eng),Level9(eng),Level10(eng),LevelPrelast(eng),Level4(eng),LevelLast(eng),LevelSrslyLast(eng),Outro(eng)]
 	for level in lvls:
 		while not level.completed:
 			level.run()

@@ -37,6 +37,8 @@ class Level:
 				self.eng.player.jumping = True
 		if pressed[K_ESCAPE]:
 			self.eng.quit()
+		if pressed[ord('f')]:
+			self.eng.toogle_fullscreen()
 
 	def jump(self):
 		if self.eng.player.jumpheight > 0:

@@ -48,8 +48,11 @@ class Engine:
 		main_dir = os.path.split(os.path.abspath(__file__))[0]
 		data_dir = os.path.join(main_dir, 'data')
 		fullname = os.path.join(data_dir, name)
-		pygame.mixer.music.load(fullname)
-		pygame.mixer.music.play(loops=repeats)
+		try:
+			pygame.mixer.music.load(fullname)
+			pygame.mixer.music.play(loops=repeats)
+		except pygame.error:
+			pass
 
 	def add_entity(self,entity):
 		self.entities.append(entity)

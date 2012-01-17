@@ -5,7 +5,7 @@ lvls =  []
 
 def start():
 	eng = engine.Engine(640,480,6,"Glow")
-	eng.play_music('music.ogg',-1)
+	eng.play_music("music.ogg",-1)
 	eng.set_background(entity.Entity('logo.png',0,0))
 	eng.render()
 	eng.delay(1500)

@@ -50,7 +50,7 @@ class Engine:
 		fullname = os.path.join(data_dir, name)
 		try:
 			pygame.mixer.music.load(fullname)
-			pygame.mixer.music.play(loops=repeats)
+			pygame.mixer.music.play(repeats)
 		except pygame.error:
 			pass
 

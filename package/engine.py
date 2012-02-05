@@ -6,7 +6,7 @@ class Engine:
 		pygame.init()
 		pygame.display.set_mode((width, height))
 		pygame.display.set_caption(caption)
-		pygame.key.set_repeat(True)
+		pygame.key.set_repeat()
 		self.screen = pygame.display.get_surface()
 		self.clock = pygame.time.Clock()
 		self.entities = []
@@ -44,7 +44,7 @@ class Engine:
 			pass
 		return sound
 
-	def play_music(selfself,name,repeats):
+	def play_music(self,name,repeats):
 		main_dir = os.path.split(os.path.abspath(__file__))[0]
 		data_dir = os.path.join(main_dir, 'data')
 		fullname = os.path.join(data_dir, name)
@@ -76,7 +76,11 @@ class Engine:
 		else:
 			if self.entities[collision[1]].enttype == "lift":
 				a = entity.rect.bottom - 5
-				if a < self.entities[collision[1]].rect.bottom and self.player.rect.top < self.entities[collision[1]].rect.top and ((self.player.rect.centerx > self.entities[collision[1]].rect.x and self.player.rect.centerx < self.entities[collision[1]].rect.right) or (self.player.rect.left > self.entities[collision[1]].rect.x and self.player.rect.left < self.entities[collision[1]].rect.right) or (self.player.rect.right > self.entities[collision[1]].rect.x and self.player.rect.right < self.entities[collision[1]].rect.right)):
+				if self.entities[collision[1]].dy != 0 and self.player.jumpheight > 0:
+					self.player.rect.y -= self.entities[collision[1]].dy
+					self.update()
+					return
+				if a < self.entities[collision[1]].rect.bottom and self.player.rect.top < self.entities[collision[1]].rect.top:
 					self.player.rect.x += self.entities[collision[1]].dx
 					self.player.rect.bottom = self.entities[collision[1]].rect.top
 					self.player.jumping = False

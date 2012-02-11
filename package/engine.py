@@ -75,12 +75,11 @@ class Engine:
 				self.player.rect.y += self.g
 		else:
 			if self.entities[collision[1]].enttype == "lift":
-				a = entity.rect.bottom - 5
 				if self.entities[collision[1]].dy != 0 and self.player.jumpheight > 0:
 					self.player.rect.y -= self.entities[collision[1]].dy
 					self.update()
 					return
-				if a < self.entities[collision[1]].rect.bottom and self.player.rect.top < self.entities[collision[1]].rect.top:
+				if entity.rect.bottom - 5 < self.entities[collision[1]].rect.bottom and self.player.rect.top < self.entities[collision[1]].rect.top:
 					self.player.rect.x += self.entities[collision[1]].dx
 					self.player.rect.bottom = self.entities[collision[1]].rect.top
 					self.player.jumping = False

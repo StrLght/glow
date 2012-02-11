@@ -111,6 +111,8 @@ class Engine:
 			else:
 				if  self.entities[collide].enttype == "exit":
 					retval.append(collide)
+			if len(retval) > 1:
+				break
 		return retval
 
 	def check_completed_collision(self):

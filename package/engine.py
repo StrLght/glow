@@ -141,18 +141,17 @@ class Engine:
 
 	def update_camera(self):
 		if self.player.rect.x > 250:
-			self.move_camera(250-self.player.rect.x)
+			self.move_camera(dx = 250-self.player.rect.x)
 		if self.player.rect.x < 150:
-			self.move_camera(150-self.player.rect.x)
+			self.move_camera(dx = 150-self.player.rect.x)
 		if self.player.rect.y < 250:
-			self.totaldelta += 250-self.player.rect.y
-			self.move_camera(0,250-self.player.rect.y)
+			self.move_camera(dy = 250-self.player.rect.y)
 		if self.player.rect.y > 420:
 			if self.totaldelta > 0:
-				self.totaldelta += 420-self.player.rect.y
-				self.move_camera(0,420-self.player.rect.y)
+				self.move_camera(dy = 420-self.player.rect.y)
 
-	def move_camera(self,dx,dy=0):
+	def move_camera(self,dx=0,dy=0):
+		self.totaldelta += dy
 		for i in range(len(self.entities)):
 			self.entities[i].move(dx,dy)
 		self.update()

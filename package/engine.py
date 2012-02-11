@@ -58,9 +58,9 @@ class Engine:
 		self.entities.append(entity)
 		self.sprites.add(entity)
 		if entity.enttype == "player":
-			self.player = self.entities[len(self.entities) - 1]
+			self.player = self.entities[-1]
 		if entity.enttype == "exit":
-			self.exit = self.entities[len(self.entities) - 1]
+			self.exit = self.entities[-1]
 
 	def remove_entity(self,entity):
 		self.entities.remove(entity)

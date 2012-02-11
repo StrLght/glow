@@ -1,4 +1,4 @@
-import engine
+import engine,levels
 from levels import *
 
 lvls =  []
@@ -18,7 +18,9 @@ def start():
 	eng.render()
 	eng.delay(2000)
 	eng.clear()
-	lvls = [Level1(eng),Level2(eng),Level3(eng),Level4(eng),Level5(eng),Level6(eng),Level7(eng),Level8(eng),Level9(eng),Level10(eng),LevelPrelast(eng),Level4(eng),LevelLast(eng),LevelSrslyLast(eng),Outro(eng)]
+	lvls = []
+	for level in [x for x in dir(levels) if x.startswith("Level") and len(x) > 5]:
+		exec("lvls.append("+level+"(eng))")
 	for level in lvls:
 		while not level.completed:
 			level.run()

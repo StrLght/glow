@@ -75,7 +75,7 @@ class Level:
 			self.eng.render()
 			self.completed = self.eng.check_completed_collision()
 
-class Level1(Level):
+class LevelA(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -88,7 +88,7 @@ class Level1(Level):
 		self.eng.add_entity(entity.Entity('exit.png',605,396,"exit"))
 		self.start_without_camera()
 
-class Level2(Level):
+class LevelB(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -103,7 +103,7 @@ class Level2(Level):
 		self.eng.add_entity(entity.Entity('exit.png',605,336,"exit"))
 		self.start_without_camera()
 
-class Level3(Level):
+class LevelC(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -117,7 +117,7 @@ class Level3(Level):
 		self.eng.add_entity(entity.Entity('exit.png',605,396,"exit"))
 		self.start_without_camera()
 
-class Level4(Level):
+class LevelD(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -131,7 +131,7 @@ class Level4(Level):
 			self.eng.render()
 			self.eng.delay(200)
 
-class Level5(Level):
+class LevelE(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -152,7 +152,7 @@ class Level5(Level):
 		self.eng.add_entity(entity.Entity('exit.png',910,31,"exit"))
 		self.start_with_camera()
 
-class Level6(Level):
+class LevelF(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -170,7 +170,7 @@ class Level6(Level):
 		self.eng.add_entity(entity.Entity('exit.png',1647,76,"exit"))
 		self.start_with_camera()
 
-class Level7(Level):
+class LevelG(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -197,7 +197,7 @@ class Level7(Level):
 		self.eng.add_entity(entity.Entity('exit.png',1460,241,"exit"))
 		self.start_with_camera()
 
-class Level8(Level):
+class LevelH(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -217,7 +217,7 @@ class Level8(Level):
 		self.eng.add_entity(entity.Entity('exit.png',1770,316,"exit"))
 		self.start_with_camera()
 
-class Level9(Level):
+class LevelI(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -236,7 +236,7 @@ class Level9(Level):
 		self.eng.add_entity(entity.Entity('exit.png',1079,195,"exit"))
 		self.start_with_camera()
 
-class Level10(Level):
+class LevelJ(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -258,7 +258,7 @@ class Level10(Level):
 		self.eng.add_entity(entity.Entity('exit.png',1540,-14,"exit"))
 		self.start_with_camera()
 
-class LevelPrelast(Level):
+class LevelK(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -271,7 +271,7 @@ class LevelPrelast(Level):
 		self.eng.add_entity(entity.Entity('fhero.png',605,396))
 		self.start_without_camera()
 
-class LevelLast(Level):
+class LevelL(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -288,7 +288,7 @@ class LevelLast(Level):
 		self.eng.add_entity(entity.Entity('exit.png',1854,396,"exit"))
 		self.start_with_camera()
 
-class LevelSrslyLast(Level):
+class LevelM(Level):
 	def run(self):
 		self.eng.clear()
 		self.going = True
@@ -305,7 +305,7 @@ class LevelSrslyLast(Level):
 		self.eng.add_entity(entity.Entity('exit.png',505,-79,"exit"))
 		self.start_with_camera()
 
-class Outro(Level):
+class LevelN(Level):
 	def run(self):
 		self.eng.clear()
 		self.completed = True

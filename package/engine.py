@@ -116,10 +116,7 @@ class Engine:
 		return retval
 
 	def check_completed_collision(self):
-		if self.player.rect.colliderect(self.exit.rect):
-			return True
-		else:
-			return False
+		return self.player.rect.colliderect(self.exit.rect)
 
 	def check_jumpable(self):
 		ent = copy.deepcopy(self.player)

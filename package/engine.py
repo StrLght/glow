@@ -146,8 +146,7 @@ class Engine:
 			self.move_camera(dx = 150-self.player.rect.x)
 		if self.player.rect.y < 250:
 			self.move_camera(dy = 250-self.player.rect.y)
-		if self.player.rect.y > 420:
-			if self.totaldelta > 0:
+		if self.player.rect.y > 420 and self.totaldelta > 0:
 				self.move_camera(dy = 420-self.player.rect.y)
 
 	def move_camera(self,dx=0,dy=0):

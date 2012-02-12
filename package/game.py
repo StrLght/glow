@@ -1,4 +1,4 @@
-import engine,levels
+import engine,levels,pyclbr
 from levels import *
 
 def start():
@@ -17,8 +17,8 @@ def start():
 	eng.delay(2000)
 	eng.clear()
 	lvls = []
-	for level in [x for x in dir(levels) if x.startswith("Level") and len(x) > 5]:
-		exec("lvls.append("+level+"(eng))")
+	for level in [x for x in pyclbr.readmodule("package.levels").keys() if x.startswith("Level") and len(x) > 5]:
+		lvls.append(getattr(levels,level)(eng))
 	for level in lvls:
 		while not level.completed:
 			level.run()

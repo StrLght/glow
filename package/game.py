@@ -1,8 +1,6 @@
 import engine,levels
 from levels import *
 
-lvls =  []
-
 def start():
 	eng = engine.Engine(640,480,6,"Glow")
 	eng.play_music("music.ogg",-1)

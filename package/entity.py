@@ -11,10 +11,7 @@ class Entity(pygame.sprite.Sprite):
 		self.totalheight = jumpheight
 
 	def __eq__(self,y):
-		if self.rect == y.rect and self.image == y.image:
-			return True
-		else:
-			return False
+		return self.rect == y.rect and self.image == y.image
 
 	def __ne__(self,y):
 		return not self.__eq__(y)

@@ -131,7 +131,11 @@ class Engine:
 	def update(self):
 		self.sprites.empty()
 		for entity in self.entities:
-			self.sprites.add(entity)
+			if entity.enttype == "text":
+				self.sprites.add(entity)
+		for entity in self.entities:
+			if entity.enttype != "text":
+				self.sprites.add(entity)
 
 	def update_camera(self):
 		if self.player.rect.x > 250:

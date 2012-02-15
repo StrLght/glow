@@ -77,14 +77,12 @@ class Engine:
 			if self.entities[collision[0]].enttype == "lift":
 				if self.entities[collision[0]].dy != 0 and self.player.jumpheight > 0:
 					self.player.rect.y -= self.entities[collision[0]].dy
-					self.update()
 					return
 				if entity.rect.bottom - 5 < self.entities[collision[0]].rect.bottom and self.player.rect.top < self.entities[collision[0]].rect.top:
 					self.player.rect.x += self.entities[collision[0]].dx
 					self.player.rect.bottom = self.entities[collision[0]].rect.top
 					self.player.jumping = False
 					self.player.jumpheight = 0
-					self.update()
 					return
 			if self.player.rect.bottom <= self.entities[collision[0]].rect.top:
 				self.player.rect.bottom = self.entities[collision[0]].rect.top
@@ -93,7 +91,6 @@ class Engine:
 			if self.player.rect.bottom > self.entities[collision[0]].rect.top:
 				self.player.rect.y += self.g
 				self.player.jumpheight = 0
-		self.update()
 
 	def clear(self):
 		self.entities = []
@@ -128,13 +125,15 @@ class Engine:
 			if event.type == QUIT:
 				self.quit()
 
-	def update(self):
+	def update(self,enttype=None,reverse=False):
 		self.sprites.empty()
 		for entity in self.entities:
-			if entity.enttype == "text":
-				self.sprites.add(entity)
-		for entity in self.entities:
-			if entity.enttype != "text":
+			if enttype is not None:
+				if reverse and entity.enttype != enttype:
+					self.sprites.add(entity)
+				if not reverse and entity.enttype == enttype:
+					self.sprites.add(entity)
+			else:
 				self.sprites.add(entity)
 
 	def update_camera(self):
@@ -151,7 +150,6 @@ class Engine:
 		self.totaldelta += dy
 		for i in range(len(self.entities)):
 			self.entities[i].move(dx,dy)
-		self.update()
 
 	def render(self):
 		if self.background is not None:
@@ -160,6 +158,9 @@ class Engine:
 		if self.player is not None:
 			self.gravity()
 			self.check_jumpable()
+		self.update("text")
+		self.sprites.draw(self.screen)
+		self.update("text",True)
 		self.sprites.draw(self.screen)
 		pygame.display.flip()
 

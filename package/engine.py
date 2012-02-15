@@ -70,27 +70,27 @@ class Engine:
 		entity = copy.deepcopy(self.player)
 		entity.rect.y += self.g
 		collision = self.check_collision(entity)
-		if  len(collision) == 1:
+		if  len(collision) == 0:
 			if self.player.jumpheight <= 0:
 				self.player.rect.y += self.g
 		else:
-			if self.entities[collision[1]].enttype == "lift":
-				if self.entities[collision[1]].dy != 0 and self.player.jumpheight > 0:
-					self.player.rect.y -= self.entities[collision[1]].dy
+			if self.entities[collision[0]].enttype == "lift":
+				if self.entities[collision[0]].dy != 0 and self.player.jumpheight > 0:
+					self.player.rect.y -= self.entities[collision[0]].dy
 					self.update()
 					return
-				if entity.rect.bottom - 5 < self.entities[collision[1]].rect.bottom and self.player.rect.top < self.entities[collision[1]].rect.top:
-					self.player.rect.x += self.entities[collision[1]].dx
-					self.player.rect.bottom = self.entities[collision[1]].rect.top
+				if entity.rect.bottom - 5 < self.entities[collision[0]].rect.bottom and self.player.rect.top < self.entities[collision[0]].rect.top:
+					self.player.rect.x += self.entities[collision[0]].dx
+					self.player.rect.bottom = self.entities[collision[0]].rect.top
 					self.player.jumping = False
 					self.player.jumpheight = 0
 					self.update()
 					return
-			if self.player.rect.bottom <= self.entities[collision[1]].rect.top:
-				self.player.rect.bottom = self.entities[collision[1]].rect.top
+			if self.player.rect.bottom <= self.entities[collision[0]].rect.top:
+				self.player.rect.bottom = self.entities[collision[0]].rect.top
 				self.player.jumping = False
 				self.player.jumpheight = 0
-			if self.player.rect.bottom > self.entities[collision[1]].rect.top:
+			if self.player.rect.bottom > self.entities[collision[0]].rect.top:
 				self.player.rect.y += self.g
 				self.player.jumpheight = 0
 		self.update()
@@ -105,13 +105,9 @@ class Engine:
 	def check_collision(self,entity,exit = False):
 		retval = []
 		for collide in entity.rect.collidelistall([x.rect for x in self.entities]):
-			if not exit:
-				if entity != self.entities[collide] and self.entities[collide].enttype != "text" and self.entities[collide].enttype != "exit":
-					retval.append(collide)
-			else:
-				if  self.entities[collide].enttype == "exit":
-					retval.append(collide)
-			if len(retval) > 1:
+			if entity != self.entities[collide] and self.entities[collide].enttype != "player" and self.entities[collide].enttype != "text" and self.entities[collide].enttype != "exit":
+				retval.append(collide)
+			if len(retval) > 0:
 				break
 		return retval
 
@@ -121,7 +117,7 @@ class Engine:
 	def check_jumpable(self):
 		ent = copy.deepcopy(self.player)
 		ent.rect.y += 1
-		if len(self.check_collision(ent)) == 1:
+		if len(self.check_collision(ent)) == 0:
 			self.player.jumping = True
 
 	def get_pressed(self):

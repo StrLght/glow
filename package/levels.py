@@ -15,21 +15,19 @@ class Level:
 		if pressed[K_LEFT] or pressed[ord('a')]:
 			entity.rect.x -= 5
 			collision = self.eng.check_collision(entity)
-			if len(collision)==1:
+			if len(collision)==0:
 				self.eng.player.rect.x -= 5
 			else:
-				if self.eng.entities[collision[1]].enttype != "lift":
-					if self.eng.entities[collision[1]].rect.bottom < self.eng.entities[collision[1]].rect.top:
-						self.eng.player.rect.left = self.eng.entities[collision[1]].rect.right
+				if self.eng.entities[collision[0]].enttype != "lift" and self.eng.entities[collision[0]].rect.bottom < self.eng.entities[collision[0]].rect.top:
+					self.eng.player.rect.left = self.eng.entities[collision[0]].rect.right
 		if pressed[K_RIGHT] or pressed[ord('d')]:
 			entity.rect.x += 5
 			collision = self.eng.check_collision(entity)
-			if len(collision) == 1:
+			if len(collision) == 0:
 				self.eng.player.rect.x += 5
 			else:
-				if self.eng.entities[collision[1]].enttype != "lift":
-					if self.eng.entities[collision[1]].rect.bottom < self.eng.entities[collision[1]].rect.top:
-						self.eng.player.rect.right = self.eng.entities[collision[1]].rect.left
+				if self.eng.entities[collision[0]].enttype != "lift" and self.eng.entities[collision[0]].rect.bottom < self.eng.entities[collision[0]].rect.top:
+					self.eng.player.rect.right = self.eng.entities[collision[0]].rect.left
 		if pressed[K_UP] or pressed[K_SPACE] or pressed[ord('w')]:
 			if not self.eng.player.jumping:
 				self.jumpsound.play()

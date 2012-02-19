@@ -12,7 +12,9 @@ class Engine:
 		self.entities = []
 		self.background = None
 		self.g = g
-		self.totaldelta = 0
+		self.maximumx = 0
+		self.totaldeltay = 0
+		self.totaldeltax = 0
 		self.player = None
 		self.exit = None
 		self.sprites = pygame.sprite.RenderPlain()
@@ -57,6 +59,8 @@ class Engine:
 	def add_entity(self,entity):
 		self.entities.append(entity)
 		self.sprites.add(entity)
+		if entity.rect.right > self.maximumx and self.player is not None:
+			self.maximumx = entity.rect.right - 250
 		if entity.enttype == "player":
 			self.player = self.entities[-1]
 		if entity.enttype == "exit":
@@ -97,7 +101,9 @@ class Engine:
 		self.sprites.empty()
 		self.background = None
 		self.player = None
-		self.totaldelta = 0
+		self.maximumx = 0
+		self.totaldeltay = 0
+		self.totaldeltax = 0
 
 	def check_collision(self,entity,exit = False):
 		retval = []
@@ -137,17 +143,19 @@ class Engine:
 				self.sprites.add(entity)
 
 	def update_camera(self):
-		if self.player.rect.x > 250:
+		if self.player.rect.x > 250 and self.maximumx > 640-250:
 			self.move_camera(dx = 250-self.player.rect.x)
-		if self.player.rect.x < 150:
+		if self.player.rect.x < 150 and self.totaldeltax > 0:
 			self.move_camera(dx = 150-self.player.rect.x)
 		if self.player.rect.y < 250:
 			self.move_camera(dy = 250-self.player.rect.y)
-		if self.player.rect.y > 420 and self.totaldelta > 0:
+		if self.player.rect.y > 420 and self.totaldeltay > 0:
 				self.move_camera(dy = 420-self.player.rect.y)
 
 	def move_camera(self,dx=0,dy=0):
-		self.totaldelta += dy
+		self.maximumx += dx
+		self.totaldeltax += dx
+		self.totaldeltay += dy
 		for i in range(len(self.entities)):
 			self.entities[i].move(dx,dy)
 

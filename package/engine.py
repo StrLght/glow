@@ -59,7 +59,7 @@ class Engine:
 	def add_entity(self,entity):
 		self.entities.append(entity)
 		self.sprites.add(entity)
-		if entity.rect.right > self.maximumx and self.player is not None:
+		if entity.rect.right > self.maximumx:
 			self.maximumx = entity.rect.right - 250
 		if entity.enttype == "player":
 			self.player = self.entities[-1]

@@ -2,7 +2,7 @@ import pygame,os,sys,copy
 from pygame.locals import *
 
 class Engine:
-	def __init__(self,width,height,g,caption="NOPE"):
+	def __init__(self, width, height, g, caption="NOPE"):
 		pygame.init()
 		pygame.display.set_mode((width, height))
 		pygame.display.set_caption(caption)
@@ -10,28 +10,24 @@ class Engine:
 		self.screen = pygame.display.get_surface()
 		self.clock = pygame.time.Clock()
 		self.entities = []
-		self.background = None
 		self.g = g
-		self.maximumx = 0
-		self.totaldeltay = 0
-		self.totaldeltax = 0
-		self.player = None
-		self.exit = None
+		self.maximumx = self.totaldeltay = self.totaldeltax = 0
+		self.background = self.player = self.exit = None
 		self.sprites = pygame.sprite.RenderPlain()
 
-	def set_background(self,background):
+	def set_background(self, background):
 		self.background = background
 
 	def get_display_rect(self):
 		return pygame.display.get_surface().get_rect()
 
-	def delay(self,time):
+	def delay(self, time):
 		pygame.time.delay(time)
 
 	def toogle_fullscreen(self):
 		pygame.display.toggle_fullscreen()
 
-	def load_sound(self,name):
+	def load_sound(self, name):
 		class NoneSound:
 			def play(self): pass
 		if not pygame.mixer:
@@ -43,10 +39,9 @@ class Engine:
 			sound = pygame.mixer.Sound(fullname)
 		except pygame.error:
 			sound = NoneSound
-			pass
 		return sound
 
-	def play_music(self,name,repeats):
+	def play_music(self, name, repeats):
 		main_dir = os.path.split(os.path.abspath(__file__))[0]
 		data_dir = os.path.join(main_dir, 'data')
 		fullname = os.path.join(data_dir, name)
@@ -56,17 +51,17 @@ class Engine:
 		except pygame.error:
 			pass
 
-	def add_entity(self,entity):
+	def add_entity(self, entity):
 		self.entities.append(entity)
 		self.sprites.add(entity)
 		if entity.rect.right > self.maximumx:
 			self.maximumx = entity.rect.right - 250
 		if entity.enttype == "player":
 			self.player = self.entities[-1]
-		if entity.enttype == "exit":
+		elif entity.enttype == "exit":
 			self.exit = self.entities[-1]
 
-	def remove_entity(self,entity):
+	def remove_entity(self, entity):
 		self.entities.remove(entity)
 		self.sprites.remove(entity)
 
@@ -99,13 +94,10 @@ class Engine:
 	def clear(self):
 		self.entities = []
 		self.sprites.empty()
-		self.background = None
-		self.player = None
-		self.maximumx = 0
-		self.totaldeltay = 0
-		self.totaldeltax = 0
+		self.background = self.player = self.exit = None
+		self.maximumx = self.totaldeltay = self.totaldeltax = 0
 
-	def check_collision(self,entity,exit = False):
+	def check_collision(self, entity, exit = False):
 		retval = []
 		for collide in entity.rect.collidelistall([x.rect for x in self.entities]):
 			if entity != self.entities[collide] and self.entities[collide].enttype != "player" and self.entities[collide].enttype != "text" and self.entities[collide].enttype != "exit":
@@ -131,7 +123,7 @@ class Engine:
 			if event.type == QUIT:
 				self.quit()
 
-	def update(self,enttype=None,reverse=False):
+	def update(self, enttype=None, reverse=False):
 		self.sprites.empty()
 		for entity in self.entities:
 			if enttype is not None:
@@ -145,30 +137,30 @@ class Engine:
 	def update_camera(self):
 		if self.player.rect.x > 250 and self.maximumx > 640-250:
 			self.move_camera(dx = 250-self.player.rect.x)
-		if self.player.rect.x < 150 and self.totaldeltax > 0:
+		elif self.player.rect.x < 150 and self.totaldeltax > 0:
 			self.move_camera(dx = 150-self.player.rect.x)
 		if self.player.rect.y < 250:
 			self.move_camera(dy = 250-self.player.rect.y)
-		if self.player.rect.y > 420 and self.totaldeltay > 0:
+		elif self.player.rect.y > 420 and self.totaldeltay > 0:
 				self.move_camera(dy = 420-self.player.rect.y)
 
-	def move_camera(self,dx=0,dy=0):
+	def move_camera(self, dx=0, dy=0):
 		self.maximumx += dx
 		self.totaldeltax += dx
 		self.totaldeltay += dy
 		for i in range(len(self.entities)):
-			self.entities[i].move(dx,dy)
+			self.entities[i].move(dx, dy)
 
 	def render(self):
 		if self.background is not None:
-			self.screen.blit(self.background.image,(0,0))
+			self.screen.blit(self.background.image, (0,0))
 		self.sprites.update()
 		if self.player is not None:
 			self.gravity()
 			self.check_jumpable()
 		self.update("text")
 		self.sprites.draw(self.screen)
-		self.update("text",True)
+		self.update("text", True)
 		self.sprites.draw(self.screen)
 		pygame.display.flip()
 

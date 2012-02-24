@@ -1,28 +1,28 @@
 import pygame,os
 
 class Entity(pygame.sprite.Sprite):
-	def __init__(self,path,x,y,enttype="static",jumpheight=0,scale=(0,0)):
+	def __init__(self, path, x, y, enttype = "static", jumpheight = 0, scale = (0,0)):
 		pygame.sprite.Sprite.__init__(self)
-		self.load_image(path,scale)
+		self.load_image(path, scale)
 		self.rect.topleft = (x,y)
 		self.enttype = enttype
 		self.jumping = False
 		self.jumpheight = 0
 		self.totalheight = jumpheight
 
-	def __eq__(self,y):
+	def __eq__(self, y):
 		return self.rect == y.rect and self.image == y.image
 
-	def __ne__(self,y):
+	def __ne__(self, y):
 		return not self.__eq__(y)
 
 	def update(self): pass
 
-	def move(self,dx,dy):
+	def move(self, dx, dy):
 		self.rect.x += dx
 		self.rect.y += dy
 
-	def load_image(self,n,scale):
+	def load_image(self, n, scale):
 		main_dir = os.path.split(os.path.abspath(__file__))[0]
 		data_dir = os.path.join(main_dir, 'data')
 		fullname = os.path.join(data_dir, n)
@@ -32,14 +32,14 @@ class Entity(pygame.sprite.Sprite):
 			raise SystemExit, message
 		image = image.convert_alpha()
 		if scale != (0,0):
-			self.image = pygame.transform.scale(image,scale)
+			self.image = pygame.transform.scale(image, scale)
 		else:
 			self.image = image
 		self.rect = self.image.get_rect()
 
 class Lift(Entity):
-	def __init__(self,path,x,y,minx,maxx,miny,maxy,dx=0,dy=0,scale=(0,0)):
-		Entity.__init__(self,path,x,y,"lift",scale=scale)
+	def __init__(self, path, x, y, minx, maxx, miny, maxy, dx = 0, dy = 0, scale = (0,0)):
+		Entity.__init__(self, path, x, y, "lift", scale = scale)
 		self.minx = minx
 		self.maxx = maxx
 		self.miny = miny
@@ -57,8 +57,8 @@ class Lift(Entity):
 		else:
 			self.horizontal = False
 
-	def move(self,dx,dy):
-		Entity.move(self,dx,dy)
+	def move(self, dx, dy):
+		Entity.move(self, dx, dy)
 		self.maxx += dx
 		self.minx += dx
 		self.maxy += dy
@@ -82,19 +82,19 @@ class Lift(Entity):
 				self.dx = -self.dx
 
 class Text(Entity):
-	def __init__(self,text,size,fontname,(x,y),(r,g,b)):
+	def __init__(self, text, size, fontname, (x,y), (r,g,b)):
 		pygame.sprite.Sprite.__init__(self)
 		self.enttype = "text"
 		self.jumpheight = 0
 		self.jumping = False
-		self.load_font(text,size,fontname,(r,g,b))
+		self.load_font(text, size, fontname, (r,g,b))
 		self.rect.topleft = (x,y)
 
-	def load_font(self,text,size,fontname,(r,g,b)):
+	def load_font(self, text, size, fontname, (r,g,b)):
 		main_dir = os.path.split(os.path.abspath(__file__))[0]
 		data_dir = os.path.join(main_dir, 'data')
 		fullname = os.path.join(data_dir, fontname)
-		font = pygame.font.Font(fullname,size)
-		self.image = font.render(text,1,(r,g,b))
+		font = pygame.font.Font(fullname, size)
+		self.image = font.render(text, 1, (r,g,b))
 		self.rect = self.image.get_rect()
 
